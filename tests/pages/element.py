@@ -31,10 +31,6 @@ class ServiceInputElement(BasePageElement):
     locator = AddServicePageLocators.SERVICE_INPUT[1]
 
 
-class ServiceOrgTypeElement(BasePageElement):
-    locator = AddServicePageLocators.ORG_TYPE_INPUT[1]
-
-
 class EmailInputElement(BasePageElement):
     locator = CommonPageLocators.EMAIL_INPUT[1]
 
