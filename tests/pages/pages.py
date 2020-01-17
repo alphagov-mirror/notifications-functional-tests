@@ -113,13 +113,6 @@ class BasePage(object):
         self.base_url = config['notify_admin_url']
         self.driver = driver
 
-    def accept_cookie_warning(self):
-        # if the cookie warning isn't present, this does nothing
-        try:
-            self.wait_for_element(CommonPageLocators.CONTINUE_BUTTON, timeout=2).click()
-        except (NoSuchElementException, TimeoutException):
-            return
-
     def wait_for_invisible_element(self, locator):
         return AntiStaleElement(
             self.driver,
