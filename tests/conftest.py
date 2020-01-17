@@ -4,17 +4,11 @@ from datetime import datetime
 from pathlib import Path
 
 from selenium import webdriver
-from selenium.common.exceptions import (
-    NoSuchElementException, TimeoutException
-)
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
 from notifications_python_client import NotificationsAPIClient
 
-from tests.pages.locators import CommonPageLocators
-from tests.pages.pages import AntiStaleElement
+from tests.pages.pages import HomePage
 from tests.pages.rollups import sign_in
 from config import config, setup_shared_config
 
@@ -60,7 +54,7 @@ def _driver():
         options = webdriver.chrome.options.Options()
         service_args = ['--verbose']
         options.add_argument("--no-sandbox")
-        options.add_argument("--headless")
+        # options.add_argument("--headless")
         options.add_argument("user-agent=Selenium")
 
         if http_proxy is not None and http_proxy != "":
@@ -78,7 +72,7 @@ def _driver():
 
     # go to root page and accept analytics cookies to hide banner in all pages
     driver.get(config['notify_admin_url'])
-    accept_cookie_warning(driver)
+    HomePage(driver).accept_cookie_warning()
     yield driver
     driver.delete_all_cookies()
     driver.close()
@@ -131,18 +125,3 @@ def seeded_client_using_test_key():
         api_key=config['service']['api_test_key']
     )
     return client
-
-
-def accept_cookie_warning(_driver):
-    # if the cookie warning isn't present, this does nothing
-    try:
-        AntiStaleElement(
-            _driver,
-            CommonPageLocators.ACCEPT_COOKIE_BUTTON,
-            lambda locator: WebDriverWait(_driver, 1).until(
-                EC.visibility_of_element_located(locator),
-                EC.presence_of_element_located(locator)
-            )
-        ).click()
-    except (NoSuchElementException, TimeoutException):
-        return
