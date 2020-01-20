@@ -18,7 +18,6 @@ def sign_in_email_auth(driver):
 def _sign_in(driver, account_type):
     sign_in_page = SignInPage(driver)
     sign_in_page.get()
-
     assert sign_in_page.is_current()
     email, password = _get_email_and_password(account_type=account_type)
     sign_in_page.login(email, password)
