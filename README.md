@@ -28,9 +28,9 @@ Note, there is an order dependency in the main tests. The registration test must
 
 ## Running the tests against your local development environment
 
-Make sure `Notifications Admin`, `Notifications Template Preview`, `Notifications API`, `Notifications API celery` and `Document Download API` are running locally.
+Make sure `Notifications Admin`, `Notifications Template Preview`, `Notifications Template Preview celery`, `Notifications API`, `Notifications API celery` and `Document Download API` are running locally.
 
-Your local celery must be run with `ANTIVIRUS_ENABLED=1` set in the environment for the test_view_precompiled_letter_message_log_virus_scan_failed test to work
+Your local `Notifications API celery` must be run with `ANTIVIRUS_ENABLED=1` set in the environment for the test_view_precompiled_letter_message_log_virus_scan_failed test to work
 
 To populate the local database run
 
