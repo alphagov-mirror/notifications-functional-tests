@@ -43,7 +43,7 @@ class NotificationStatuses:
     ACCEPTED = {'accepted'}
     RECEIVED = {'received'}
     DELIVERED = {'delivered', 'temporary-failure', 'permanent-failure'}
-    SENT = RECEIVED | DELIVERED | {'sending', 'pending'}
+    SENT = RECEIVED | DELIVERED | {'sending', 'pending', 'sent'}
 
 
 def create_temp_csv(fields):
